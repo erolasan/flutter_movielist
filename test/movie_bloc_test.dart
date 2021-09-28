@@ -4,16 +4,17 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:movielist/bloc/movie_bloc.dart';
 import 'package:movielist/models/movie.dart';
-import 'package:movielist/repos/movie_repo.dart';
+import 'package:movielist/models/movies_response.dart';
+import 'package:movielist/repos/movie_client.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockMovieRepository extends Mock implements IMovieRepository {}
+class MockMovieClient extends Mock implements MovieApiClient {}
 
 void main() {
-  late MockMovieRepository mockMovieRepository;
+  late MockMovieClient mockMovieClient;
 
   setUp(() {
-    mockMovieRepository = MockMovieRepository();
+    mockMovieClient = MockMovieClient();
   });
 
   group('GetMovies', () {
@@ -28,20 +29,25 @@ void main() {
           voteAverage: 5.6,
           voteCount: 120)
     ];
+    const currentPage = 1;
+    const totalPages = 500;
+
+    final MoviesResponse moviesResponse = MoviesResponse(page: currentPage, results: movies, totalPages: totalPages);
 
     blocTest('emits MovieSuccess when successful',
         build: () {
-          when(() => mockMovieRepository.fetchMovies(1)).thenAnswer((_) async => movies);
-          return MovieBloc(movieRepository: mockMovieRepository);
+          when(() => mockMovieClient.fetchMovies(pageToFetch: 1)).thenAnswer((_) async => moviesResponse);
+          return MovieBloc(movieClient: mockMovieClient);
         },
         act: (dynamic bloc) => bloc.add(MoviesFetch()),
         wait: const Duration(milliseconds: 500),
-        expect: () => [MovieSuccess(movies: movies, currentPage: 1)]);
+        expect: () => [MovieSuccess(movies: movies, currentPage: currentPage, totalPages: totalPages)]);
 
     blocTest('emits MovieFailure when unsuccessful',
         build: () {
-          when(() => mockMovieRepository.fetchMovies(1)).thenThrow(const HttpException("Error while fetching movies"));
-          return MovieBloc(movieRepository: mockMovieRepository);
+          when(() => mockMovieClient.fetchMovies(pageToFetch: 1))
+              .thenThrow(const HttpException("Error while fetching movies"));
+          return MovieBloc(movieClient: mockMovieClient);
         },
         act: (dynamic bloc) => bloc.add(MoviesFetch()),
         wait: const Duration(milliseconds: 500),

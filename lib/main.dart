@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'repos/movie_repo.dart';
+import 'repos/movie_client.dart';
 import 'screens/home/home.dart';
 import './bloc/movie_bloc.dart';
 import './bloc_observer.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         body: BlocProvider(
           create: (context) =>
-              MovieBloc(movieRepository: locator<IMovieRepository>())
+              MovieBloc(movieClient: locator<MovieApiClient>())
                 ..add(MoviesFetch()),
           child: const HomePage(),
         ),

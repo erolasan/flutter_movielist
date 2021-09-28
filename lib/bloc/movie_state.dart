@@ -15,14 +15,15 @@ class MovieInitial extends MovieState {
 class MovieSuccess extends MovieState {
   final List<Movie> movies;
   final int currentPage;
+  final int totalPages;
 
-  const MovieSuccess({required this.movies, required this.currentPage});
-
-  @override
-  List<Object> get props => [movies, currentPage];
+  const MovieSuccess({required this.movies, required this.currentPage, required this.totalPages});
 
   @override
-  String toString() => 'MovieSuccess { movies: ${movies.length}, currentPage: $currentPage }';
+  List<Object> get props => [movies, currentPage, totalPages];
+
+  @override
+  String toString() => 'MovieSuccess { movies: ${movies.length}, currentPage: $currentPage, totalPages: $totalPages }';
 }
 
 class MovieFailure extends MovieState {}
