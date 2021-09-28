@@ -6,7 +6,7 @@ import 'bottom_spinner.dart';
 import 'movie_tile.dart';
 
 class MovieList extends StatefulWidget {
-  MovieList({Key key}) : super(key: key);
+  const MovieList({Key? key}) : super(key: key);
 
   @override
   _MovieListState createState() => _MovieListState();
@@ -15,7 +15,7 @@ class MovieList extends StatefulWidget {
 class _MovieListState extends State<MovieList> {
   final _scrollController = ScrollController();
   final _scrollThreshold = 200.0;
-  MovieBloc _movieBloc;
+  late MovieBloc _movieBloc;
 
   @override
   void initState() {
@@ -29,34 +29,30 @@ class _MovieListState extends State<MovieList> {
     return BlocBuilder<MovieBloc, MovieState>(
       builder: (context, state) {
         if (state is MovieInitial) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
         if (state is MovieFailure) {
-          return Center(
+          return const Center(
             child: Text('An error ocurred while fetching movies.'),
           );
         }
         if (state is MovieSuccess) {
           if (state.movies.isEmpty) {
-            return Center(
+            return const Center(
               child: Text('No movies found.'),
             );
           }
           return ListView.builder(
             itemBuilder: (BuildContext context, int index) {
-              return index >= state.movies.length
-                  ? BottomSpinner()
-                  : MovieTile(movie: state.movies[index]);
+              return index >= state.movies.length ? const BottomSpinner() : MovieTile(movie: state.movies[index]);
             },
-            itemCount: state.currentPage == 100
-                ? state.movies.length
-                : state.movies.length + 1,
+            itemCount: state.currentPage == 100 ? state.movies.length : state.movies.length + 1,
             controller: _scrollController,
           );
         } else {
-          return Center(
+          return const Center(
             child: Text('Unknown bloc state'),
           );
         }

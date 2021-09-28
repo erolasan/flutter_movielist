@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class MovieTile extends StatelessWidget {
   final Movie movie;
 
-  const MovieTile({Key key, @required this.movie}) : super(key: key);
+  const MovieTile({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,22 +18,16 @@ class MovieTile extends StatelessWidget {
                     movie: movie,
                   ))),
       child: Container(
-        decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(width: 0.5, color: Colors.grey[400]))),
+        decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 0.5, color: Colors.grey[400]!))),
         padding: const EdgeInsets.all(20),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Flexible(
-            child: Text(movie.title,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: TextStyle(fontSize: 16)),
+            child: Text(movie.title!, overflow: TextOverflow.ellipsis, maxLines: 1, style: const TextStyle(fontSize: 16)),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
-          Icon(Icons.chevron_right)
+          const Icon(Icons.chevron_right)
         ]),
       ),
     );

@@ -5,21 +5,21 @@ description: A new Flutter project.
 # pub.dev using `pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.13.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc: ^6.0.6
-  bloc_test: ^7.1.0
-  http: ^0.12.0
-  equatable: ^1.2.0
-  rxdart: ^0.23.1
-  logger: ^0.9.4
-  get_it: ^5.0.1
+  flutter_bloc: ^7.3.0
+  bloc_test: ^8.2.0
+  http: ^0.13.3
+  equatable: ^2.0.3
+  rxdart: ^0.27.2
+  logger: ^1.1.0
+  get_it: ^7.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -29,6 +29,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^1.0.4
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

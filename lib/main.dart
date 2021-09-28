@@ -9,10 +9,12 @@ import 'service_locator.dart';
 void main() {
   Bloc.observer = SimpleBlocObserver();
   setupLocator();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,13 +25,13 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Movie List'),
+          title: const Text('Movie List'),
         ),
         body: BlocProvider(
           create: (context) =>
               MovieBloc(movieRepository: locator<IMovieRepository>())
                 ..add(MoviesFetch()),
-          child: HomePage(),
+          child: const HomePage(),
         ),
       ),
     );
