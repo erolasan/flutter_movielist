@@ -22,7 +22,7 @@ class MovieTile extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Flexible(
-            child: Text(movie.title!, overflow: TextOverflow.ellipsis, maxLines: 1, style: const TextStyle(fontSize: 16)),
+            child: Text(movie.title, overflow: TextOverflow.ellipsis, maxLines: 1, style: const TextStyle(fontSize: 16)),
           ),
           const SizedBox(
             width: 10,

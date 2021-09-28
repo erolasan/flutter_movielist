@@ -1,34 +1,36 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'movie.g.dart';
+
+@JsonSerializable()
 class Movie extends Equatable {
-  final num? id;
+  final num id;
+  final String title;
   final num? popularity;
-  final num? voteCount;
-  final num? voteAverage;
-  final String? posterPath;
-  final String? title;
   final String? overview;
+  @JsonKey(name: 'vote_count')
+  final num? voteCount;
+  @JsonKey(name: 'vote_average')
+  final num? voteAverage;
+  @JsonKey(name: 'poster_path')
+  final String? posterPath;
+  @JsonKey(name: 'release_date')
   final DateTime? releaseDate;
 
   const Movie(
-      {this.popularity,
+      {required this.id,
+      required this.title,
+      this.popularity,
       this.voteCount,
-      this.id,
       this.voteAverage,
       this.posterPath,
-      this.title,
       this.overview,
       this.releaseDate});
 
-  Movie.fromJson(Map<String, dynamic> data)
-      : id = data['id'],
-        popularity = data['popularity'],
-        voteCount = data['vote_count'],
-        voteAverage = data['vote_average'],
-        posterPath = data['poster_path'],
-        title = data['title'],
-        overview = data['overview'],
-        releaseDate = DateTime.parse(data['release_date']);
+  factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MovieToJson(this);
 
   @override
   List<Object?> get props => [id, popularity, voteCount, voteAverage, posterPath, title, overview, releaseDate];

@@ -20,6 +20,7 @@ dependencies:
   rxdart: ^0.27.2
   logger: ^1.1.0
   get_it: ^7.2.0
+  json_annotation: ^4.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -30,6 +31,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.4
+  build_runner: ^2.0.0
+  json_serializable: ^5.0.0
 
 
 # For information on the generic Dart part of this file, see the
